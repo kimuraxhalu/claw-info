@@ -1,0 +1,6 @@
+# requirements.txt
+# 在此文件中列出您的 Python 依賴包，例如：
+# requests==2.31.0
+# numpy>=1.26.0
+python-telegram-bot==20.7
+requests==2.31.0
