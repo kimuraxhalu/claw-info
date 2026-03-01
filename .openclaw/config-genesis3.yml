@@ -1,0 +1,60 @@
+# ADAM Genesis 3.0 藍圖
+# 位置: Codespaces (指揮中心) + AWS EC2 (Ollama 軍營)
+# 更新日期: 2026-02-28
+
+settings:
+  version: "2026.2.26"
+  
+  # 自動進化：每日檢查官方更新
+  update:
+    auto:
+      enabled: true
+      channel: "stable"
+  
+  # 記憶系統：GitHub (闇遊戲)
+  memory:
+    backend: "github"
+    repo: "${GITHUB_REPOSITORY}"
+    branch: "adam-memory"
+    
+  # Secrets 來自環境變數
+  secrets:
+    provider: "env"
+
+# 三君王架構（核心）
+agents:
+  rimuru-architect:
+    name: "利姆路·大魔王"
+    model: "global.anthropic.claude-opus-4-6"
+    provider: "bedrock"
+    region: "us-east-1"
+    system_prompt_file: ".openclaw/agents/rimuru.system"
+    daily_budget: 5.00
+    role: "supreme_commander"
+    
+  sungjinwoo-swarm:
+    name: "成振宇·暗影軍團"
+    model: "ollama/llama3.2:3b"
+    provider: "ollama"
+    host: "${OLLAMA_HOST:-pending-aws-ec2}"
+    role: "executor"
+    parallel: 1000
+    
+  gojo-validator:
+    name: "五條悟·無量空處"
+    model: "ollama/qwen2.5:7b"
+    provider: "ollama"
+    host: "${OLLAMA_HOST:-pending-aws-ec2}"
+    role: "validator"
+    threshold: 0.30
+
+# 成本恆溫器
+costControl:
+  dailyBudgetUsd: 5.00
+  emergencyStopAt: 0.95
+
+channels:
+  telegram:
+    enabled: true
+    botToken: "${TELEGRAM_BOT_TOKEN}"
+    allowedUsers: ["${TELEGRAM_USER_ID}"]
