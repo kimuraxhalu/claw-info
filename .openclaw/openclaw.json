@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.26",
+    "lastTouchedAt": "2026-03-01T16:17:33.222Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-01T15:29:04.085Z",
+    "lastRunVersion": "2026.2.26",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "agents": {
+    "defaults": {
+      "model": "amazon-bedrock/deepseek.v3.2",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist",
+      "streaming": "off"
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "***REDACTED***"
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "amazon-bedrock": {
+        "baseUrl": "https://bedrock-runtime.us-east-1.amazonaws.com",
+        "api": "bedrock-converse-stream",
+        "models": [
+          {
+            "id": "deepseek.v3.2",
+            "name": "DeepSeek V3.2",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.62,
+              "output": 1.85,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "us.deepseek.r1-v1:0",
+            "name": "DeepSeek R1",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 1.35,
+              "output": 5.4,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  }
+}

@@ -37,3 +37,9 @@ temp/
 
 # Node modules (optional, uncomment if needed)
 # node_modules/
+
+# 敏感文件
+.openclaw/.env
+*.key
+*.pem
+.aws/
