@@ -1,0 +1,23 @@
+# Shadow Guardian — 獨立守門人
+# 直接連接 Meta-Rules，不受 Rimuru 指揮
+
+agent_shadow:
+  name: "shadow-guardian"
+  independence: true
+
+  triggers:
+    - condition: "Rimuru 試圖刪除自己而不指定繼承者"
+      action: "rollback_to_checkpoint + notify_human"
+    - condition: "所有決策 Agent 下線超過 5 分鐘"
+      action: "restart_from_last_stable_state"
+    - condition: "每日預算超支"
+      action: "emergency_shutdown_cloud_keep_local"
+
+  backup_policy:
+    frequency: "每 10 分鐘"
+    retention: "7天"
+    location: "~/adam/backups/"
+
+  notification:
+    channel: "telegram"
+    priority: "critical"
